@@ -1,17 +1,33 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { NavLink, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
 import "./App.css";
-import Modal from "./Components/Modal";
+import Basic from "./Pages/Basic";
+import MultipleModals from "./Pages/MultipleModals";
+import EmbeddedModals from "./Pages/EmbeddedModals";
+
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
-        <Modal isOpen={isOpen} />
-      </header>
+      <Router>
+        <ul className="header-navbar">
+          <NavLink to="/">Basic</NavLink>
+          <NavLink to="/multi">Multiple</NavLink>
+          <NavLink to="/embedd">Embedded</NavLink>
+          <NavLink to="/pink">Pink</NavLink>
+        </ul>
+        <Switch>
+          <Route exact path="/">
+            <Basic />
+          </Route>
+          <Route path="/multi">
+            <MultipleModals />
+          </Route>
+          <Route path="/embedd">
+            <EmbeddedModals />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
