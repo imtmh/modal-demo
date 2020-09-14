@@ -4,7 +4,9 @@ import { NavLink, Route, BrowserRouter as Router, Switch } from "react-router-do
 import "./App.css";
 import Basic from "./Pages/Basic";
 import MultipleModals from "./Pages/MultipleModals";
+import MultipleModalsStack from "./Pages/MultipleModalsStack";
 import EmbeddedModals from "./Pages/EmbeddedModals";
+import HeightWidthConfig from "./Pages/HeightWidthConfig";
 
 function App() {
   return (
@@ -13,8 +15,9 @@ function App() {
         <ul className="header-navbar">
           <NavLink to="/">Basic</NavLink>
           <NavLink to="/multi">Multiple</NavLink>
+          <NavLink to="/multi-stack">Multiple-stack</NavLink>
           <NavLink to="/embedd">Embedded</NavLink>
-          <NavLink to="/pink">Pink</NavLink>
+          <NavLink to="/configurable">Customised config</NavLink>
         </ul>
         <Switch>
           <Route exact path="/">
@@ -23,8 +26,16 @@ function App() {
           <Route path="/multi">
             <MultipleModals />
           </Route>
+          <Route path="/multi-stack">
+            <MultipleModalsStack />
+          </Route>
+
           <Route path="/embedd">
             <EmbeddedModals />
+          </Route>
+
+          <Route exact path="/configurable">
+            <HeightWidthConfig />
           </Route>
         </Switch>
       </Router>

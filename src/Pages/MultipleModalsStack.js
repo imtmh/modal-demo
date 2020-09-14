@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Modal from "../Components/Modal";
 
 const NUMBER_OF_ITEMS = 10;
 function MultipleModals() {
   const [openModals, setOpenModals] = useState({});
 
+  const modalRef = useRef(openModals);
+  modalRef.current = openModals;
+
+  function handleOpenMultiModals() {
+    for (let index = 0; index < NUMBER_OF_ITEMS; index++) {
+      setTimeout(() => setOpenModals({ ...modalRef.current, [index + 1]: index + 1 }), index * 100);
+    }
+  }
   return (
     <header className="App-header">
-      {[...Array(NUMBER_OF_ITEMS)].map((item, index) => (
-        <RenderButton item={item} index={index} key={index} onClick={() => setOpenModals({ ...openModals, [index + 1]: index + 1 })} />
-      ))}
+      <RenderButton item={1} index={1} key={1} onClick={() => handleOpenMultiModals()} />
 
       {[...Array(NUMBER_OF_ITEMS)].map((item, index) => (
         <Modal
@@ -28,7 +34,7 @@ function MultipleModals() {
 function RenderButton({ item, index, onClick }) {
   return (
     <div>
-      <button onClick={onClick}>Open modal {index + 1}</button>
+      <button onClick={onClick}>Open 10 stacked modals</button>
     </div>
   );
 }

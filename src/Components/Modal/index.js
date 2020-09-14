@@ -1,20 +1,19 @@
 import React from "react";
 import Body from "./Body";
+import Container from "./Container";
 import Footer from "./Footer";
 import Header from "./Header";
 
 import "./modal.scss";
 
-export default function Modal({ isOpen, children, toggleModal, title, hideHeader, hideFooter, closeButtonLabel }) {
-  const modalClassName = `modal ${isOpen ? "" : "hide"}`;
+export default function Modal({ isOpen, children, toggleModal, title, hideHeader, hideFooter, closeButtonLabel, height, width, noOverlay }) {
   return (
-    <div className={modalClassName}>
-      <section className="container">
-        <Header title={title} toggleModal={toggleModal} />
+    <Container isOpen={isOpen} children={children} height={height} width={width} noOverlay={noOverlay}>
+      {!hideHeader && <Header title={title} toggleModal={toggleModal} />}
 
-        <Body>{children}</Body>
-        <Footer toggleModal={toggleModal} closeButtonLabel={closeButtonLabel} />
-      </section>
-    </div>
+      <Body>{children}</Body>
+
+      {!hideFooter && <Footer toggleModal={toggleModal} closeButtonLabel={closeButtonLabel} />}
+    </Container>
   );
 }
